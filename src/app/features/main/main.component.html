@@ -1,0 +1,50 @@
+<form [formGroup]="wordFilterForm">
+    <div>
+        <label>Word length: </label>
+        <input type="number" formControlName="length" />
+    </div>
+    <div>
+        <label>Word starts with: </label>
+        <input type="text" formControlName="startsWith" />
+    </div>
+    <div>
+        <label>Word ends with: </label>
+        <input type="text" formControlName="endsWith" />
+    </div>
+    <br />
+    <div>
+        <label>Add character at position which exists</label>
+        <app-symbol-form (atCharacterSubmit)="atContainsCharactersSubmit($event)"></app-symbol-form>
+        <div *ngFor="let character of containsCharactersAtPositions">
+            <label>Symbol: {{character.symbol}}; Position: {{character.position}}</label>
+        </div>
+    </div>
+    <br />
+    <div>
+        <label>Add character at position which doesn't exists</label>
+        <app-symbol-form (atCharacterSubmit)="atDoesNotContainsCharactersSubmit($event)"></app-symbol-form>
+        <div *ngFor="let character of doesNotContainsCharactersAtPositions">
+            <label>Symbol: {{character.symbol}}; Position: {{character.position}}</label>
+        </div>
+    </div>
+    <br />
+    <div>
+        <label>Add character which exists or not: </label>
+        <input type="text" (change)="onSymbolChange($event)"/>
+        <button type="submit" (click)="addCharacterExist()">exist</button>
+        <button type="submit" (click)="addCharacterDoesNotExist()">not exist</button>
+        <div *ngFor="let character of containsCharacters">
+            <label>{{character}} </label>
+        </div>
+        <br />
+        <div *ngFor="let character of doesNotContainsCharacters">
+            <label>{{character}}</label>
+        </div>
+    </div>
+
+    <button type="submit" (click)="atSubmit()">Submit</button>
+
+    <div *ngFor="let word of returnedWords">
+        <p>{{word}}</p>
+    </div>
+</form>

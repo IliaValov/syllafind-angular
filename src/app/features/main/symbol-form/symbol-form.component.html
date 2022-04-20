@@ -1,0 +1,6 @@
+<form [formGroup]="symbolFormGroup">
+    <label>Character: </label>
+    <input type="text" formControlName="symbol" placeholder="enter symbol"/>
+    <input type="number" formControlName="position" placeholder="enter position"/>
+    <button (click)="atSubmit()">submit</button>
+</form>
